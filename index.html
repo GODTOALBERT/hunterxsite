@@ -21,6 +21,7 @@
       overflow: hidden;
       position: relative;
       font-family: Arial, sans-serif;
+      cursor: pointer;
     }
 
     body::before {
@@ -44,13 +45,22 @@
     }
   </style>
 </head>
-<body>
+<body onclick="playMusic()">
   <h1>STOP HERE!</h1>
 
-  <!-- 🎵 Hintergrundmusik -->
-  <audio autoplay loop>
+  <!-- 🎵 Musik -->
+  <audio id="bgmusic" loop>
     <source src="musik.mp3" type="audio/mpeg">
     Dein Browser unterstützt kein Audio.
   </audio>
+
+  <script>
+    function playMusic() {
+      const audio = document.getElementById('bgmusic');
+      audio.play();
+      // Nur beim ersten Klick
+      document.body.onclick = null;
+    }
+  </script>
 </body>
 </html>
