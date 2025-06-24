@@ -43,23 +43,35 @@
       background: rgba(0, 0, 0, 0.5);
       border-radius: 10px;
     }
+
+    #hint {
+      position: absolute;
+      bottom: 20px;
+      color: white;
+      font-size: 1rem;
+      text-align: center;
+      z-index: 2;
+      text-shadow: 1px 1px 3px black;
+    }
   </style>
 </head>
-<body onclick="playMusic()">
+<body onclick="startMusic()">
   <h1>STOP HERE!</h1>
+  <div id="hint">🔊 Klick irgendwo, um Musik zu starten</div>
 
-  <!-- 🎵 Musik -->
   <audio id="bgmusic" loop>
     <source src="musik.mp3" type="audio/mpeg">
     Dein Browser unterstützt kein Audio.
   </audio>
 
   <script>
-    function playMusic() {
+    function startMusic() {
       const audio = document.getElementById('bgmusic');
-      audio.play();
-      // Nur beim ersten Klick
-      document.body.onclick = null;
+      audio.play().catch((e) => {
+        alert("Musik konnte nicht gestartet werden: " + e);
+      });
+      document.body.onclick = null; // nur einmal starten
+      document.getElementById("hint").remove(); // Hinweis ausblenden
     }
   </script>
 </body>
